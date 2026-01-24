@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dolby Encode/Decode (Web Audio)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 24px auto; padding: 0 12px; }
+    .row { display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin: 12px 0; }
+    label { display:flex; flex-direction:column; gap:6px; font-size:14px; }
+    input[type="range"] { width: 240px; }
+    select, input[type="file"] { font-size:14px; }
+    .small { color:#555; font-size:13px; line-height:1.35; }
+    .card { border:1px solid #ddd; border-radius:12px; padding:16px; }
+  </style>
+</head>
+<body>
+  <h1>Dolby Encode/Decode (Live)</h1>
+
+  <div class="card">
+    <div class="row">
+      <input id="file" type="file" accept="audio/*" />
+      <button id="start">Start Audio Context</button>
+    </div>
+
+    <audio id="player" controls style="width:100%; margin-top:10px;"></audio>
+
+    <div class="row" style="margin-top:14px;">
+      <label>
+        Mode
+        <select id="mode">
+          <option value="bypass">Bypass</option>
+          <option value="encode">Encode</option>
+          <option value="decode">Decode</option>
+        </select>
+      </label>
+
+      <label>
+        Amount
+        <input id="amount" type="range" min="0" max="2" step="0.001" value="1" />
+        <span class="small" id="amountVal"></span>
+      </label>
+
+      <label>
+        Emphasis (brightness)
+        <input id="emphasis" type="range" min="0" max="2" step="0.001" value="1" />
+        <span class="small" id="emphasisVal"></span>
+      </label>
+
+      <label>
+        Threshold
+        <input id="threshold" type="range" min="-60" max="0" step="0.1" value="-35" />
+        <span class="small" id="thresholdVal"></span>
+      </label>
+
+      <label>
+        Attack (ms)
+        <input id="attack" type="range" min="0.5" max="50" step="0.1" value="5" />
+        <span class="small" id="attackVal"></span>
+      </label>
+
+      <label>
+        Release (ms)
+        <input id="release" type="range" min="10" max="500" step="1" value="120" />
+        <span class="small" id="releaseVal"></span>
+      </label>
+    </div>
+
+    <p class="small">
+      Tip: use <b>Decode</b> on Dolby-B encoded tapes; use <b>Encode</b> to preview what would be recorded.
+      If it sounds too “spitty” or “dull”, adjust <b>Emphasis</b> and <b>Threshold</b>.
+    </p>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
